@@ -1,0 +1,12 @@
+{% extends "papers/base.html" %}
+
+{% block title %}Doubleblind - Homepage{% endblock%}
+
+{% block content %}
+	
+	{%for sender in latest_senders %}
+		{{ sender.email }}<br>
+	{% endfor %}
+
+
+{% endblock %}
