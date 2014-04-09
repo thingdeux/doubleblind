@@ -4,9 +4,22 @@
 
 {% block content %}
 	
-	{%for sender in latest_senders %}
-		{{ sender.email }}<br>
-	{% endfor %}
+	
 
+	<div id = "nav_buttons">
+
+		<a href = "#" class="no_undie_link">
+			<div id = "create_button" class = "big_buttons">
+				Create a Request
+			</div>
+		</a>
+		
+		<a href = "#" class="no_undie_link">
+			<div id = "view_button" class = "big_buttons">
+				View a Request
+			</div>
+		</a>
+
+	</div>
 
 {% endblock %}

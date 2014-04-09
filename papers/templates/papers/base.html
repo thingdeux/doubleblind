@@ -3,11 +3,18 @@
 
 <head>	
 	{% load staticfiles %}
-	<script type="text/javascript" src='{% static "Doubleblind/js/lib/jquery-1.10.2.min.js" %}'></script>	
+	<script type="text/javascript" src='{% static "js/lib/jquery-1.10.2.min.js" %}'></script>
+	<link rel="stylesheet" href='{% static "css/base.css" %}' type="text/css">
 	<title>{% block title %}DoubleBlind - Home{% endblock %}</title>
 </head>
 
 <body>
+	<div id = "title">
+		<div id = "site_name">
+			Doubleblind
+		</div>
+	</div>
+
 	<div id="content">
 		{% block content %}	
 		{% endblock %}
@@ -15,6 +22,9 @@
 	
 	<div id="footer">
 		{% block footer %}
+		<a href = "#" class="no_undie_link"> Report Abuse</a> - 
+		<a href = "#" class="no_undie_link"> Contact Us</a> - 
+		<a href = "#" class="no_undie_link"> API</a>
 		{% endblock %}
 	</div>
 

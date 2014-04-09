@@ -1,0 +1,64 @@
+body {
+	background: radial-gradient(#E6F0F0, gray) repeat scroll 0% 0% transparent;	
+}
+
+#title {
+	margin-top: -10px;
+	margin-left: -10px;	
+	width: 105%;
+	height: 70px;
+	background-color: #9CBBBB;
+}
+	#site_name {		
+		margin-left: 20%;
+		padding-top: 20px;
+		font-size: 30px;
+	}
+
+#content {	
+	min-width: 1024px;
+	max-width: 1024px;
+	min-height: 768px;
+	max-height: 768px;	
+	margin: auto;
+	margin-top: 2%;
+}
+
+#nav_buttons {		
+	min-width: 400px;
+	max-width: 400px;
+	margin: auto;	
+}
+
+	.big_buttons {
+		min-width: 100px;	
+		max-width: 100px;
+		min-height: 100px;
+		max-height: 100px;
+		border-radius: 20px;
+		padding: 10px;
+		display: inline-block;					
+		margin-left: 12%;
+		color: #E6F0F0;
+	}
+
+	#create_button {	
+		background-color: #719E9E;		
+	}
+
+	#view_button {		
+		background-color: #4D8686;						
+	}
+
+
+#footer {
+	min-width: 100%;
+	text-align: center;
+}
+
+
+
+.no_undie_link {
+	color: black;
+	text-decoration: none;
+}
