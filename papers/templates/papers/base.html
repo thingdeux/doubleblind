@@ -5,13 +5,14 @@
 	{% load staticfiles %}
 	<script type="text/javascript" src='{% static "js/lib/jquery-1.10.2.min.js" %}'></script>
 	<link rel="stylesheet" href='{% static "css/base.css" %}' type="text/css">
-	<title>{% block title %}DoubleBlind - Home{% endblock %}</title>
+	
+	<title>{% block title %} {{ site_name }} {% endblock %}</title>
 </head>
 
 <body>
 	<div id = "title">
 		<div id = "site_name">
-			Doubleblind
+			{{ site_name }}
 		</div>
 	</div>
 
@@ -23,7 +24,8 @@
 	<div id="footer">
 		{% block footer %}
 		<a href = "#" class="no_undie_link"> Report Abuse</a> - 
-		<a href = "#" class="no_undie_link"> Contact Us</a> - 
+		<a href = "#" class="no_undie_link"> Contact Us</a> - 		
+		<a href = "#" class="no_undie_link"> Privacy Policy</a> - 
 		<a href = "#" class="no_undie_link"> API</a>
 		{% endblock %}
 	</div>

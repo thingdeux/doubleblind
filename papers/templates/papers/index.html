@@ -1,25 +1,32 @@
 {% extends "papers/base.html" %}
 
-{% block title %}Doubleblind - Homepage{% endblock%}
+{% block title %}{{ site_name }}{% endblock%}
 
 {% block content %}
-	
-	
-
+		
 	<div id = "nav_buttons">
 
 		<a href = "#" class="no_undie_link">
 			<div id = "create_button" class = "big_buttons">
-				Create a Request
+				<span class="button_text">Ask</span>
 			</div>
 		</a>
 		
 		<a href = "#" class="no_undie_link">
 			<div id = "view_button" class = "big_buttons">
-				View a Request
+				<span class="button_text">View</span>
 			</div>
 		</a>
 
+	</div>
+
+	<div id = "smiley_mouth">
+		<ul class = "mouth_text">
+			<li>Ask someone a question.</li>
+			<li>Get the answer you seek!</li>			
+			<li>Remain Anonymous</li>		
+			<span id="video_link"><a href = "#">Learn More</a></span>
+		</ul>
 	</div>
 
 {% endblock %}

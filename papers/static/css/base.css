@@ -1,18 +1,19 @@
 body {
-	background: radial-gradient(#E6F0F0, gray) repeat scroll 0% 0% transparent;	
+	background: radial-gradient(#A4B3B3, #9CBBBB) repeat scroll 0% 0% transparent;	
 }
 
 #title {
 	margin-top: -10px;
 	margin-left: -10px;	
-	width: 105%;
+	width: 110%;
 	height: 70px;
-	background-color: #9CBBBB;
+	background-color: #FFF;
 }
 	#site_name {		
-		margin-left: 20%;
+		margin-left: 18%;
 		padding-top: 20px;
 		font-size: 30px;
+		color: #445F5F;
 	}
 
 #content {	
@@ -35,25 +36,62 @@ body {
 		max-width: 100px;
 		min-height: 100px;
 		max-height: 100px;
-		border-radius: 20px;
+		border-radius: 50px;
 		padding: 10px;
 		display: inline-block;					
 		margin-left: 12%;
 		color: #E6F0F0;
+		font-size: 25px;
+		text-align: center;					
 	}
 
-	#create_button {	
+	#create_button {		
 		background-color: #719E9E;		
 	}
 
-	#view_button {		
+	#view_button {				
 		background-color: #4D8686;						
 	}
 
+	.button_text {
+		position: absolute;
+		margin-top: 30px;
+		margin-left: -30px;
+	}
+
+
+#smiley_mouth{
+	margin: auto;
+	margin-top: 30px;
+	
+	min-height: 150px;
+	max-height: 150px;
+	min-width: 290px;
+	max-width: 290px;	
+
+	border-radius: 0 0 90px 90px;
+	-moz-border-radius: 0 0 90px 90px;
+	-webkit-border-radius: 0 0 90px 90px;
+	background: #FFF;	
+}
+
+	.mouth_text {		
+		color: #719E9E;
+		text-align: center;
+		padding-right: 30px;
+		padding-top: 30px;		
+	}	
+
+	#video_link {
+		position: absolute;
+		margin-top: 15px;
+		margin-left: -50px;
+	}
 
 #footer {
 	min-width: 100%;
 	text-align: center;
+	font-size: 10px;
 }
 
 
