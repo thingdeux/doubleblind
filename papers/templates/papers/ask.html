@@ -1,0 +1,56 @@
+{% extends "papers/base.html" %}
+
+{% block libraries %}
+	{% load staticfiles %}
+	<script type="text/javascript" src='{% static "js/lib/jquery-ui-1.10.4.min.js" %}'></script>	
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css">
+	<script src = '{%static "js/ask.js"%}'></script>
+	<link rel="stylesheet" href='{% static "css/ask.css" %}' type="text/css">
+
+{% endblock %}
+
+{% block content%}
+	
+	<div id="ask_window">
+		<ul>
+			<li><a href="#multi">Multiple Choice</a></li>
+			<li><a href="#open">Open-Ended</a></li>						
+			<li><a href="#secret">Secret Reponse</a></li>
+		</ul>
+
+		<div id = "multi">			
+			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
+			<a href="#" class="helper_button">Example Usage</a>						
+
+			<div class = "helper_text">
+				<ul>
+					<h2><u>Multiple choice question Tips</u></h2>
+					<li>Include enough options to keep your desired answer obscure.</li>
+					<li>Keep answers simple and to the point</li>
+					<li>Keep answers consistent, if one is capitalized, they all should be.</li>
+					<li>Yes/No/Maybe answers aren't suggested.  Maybe has ruined many a day.</li>
+				</ul>
+			</div>
+
+			<div class = "submission_form">
+				<form id="multi">
+					Send To: <input type="text"></input>
+					<input type="radio">(URL Only)</input>
+
+				</form>
+			</div>
+			
+		</div>
+
+		<div id ="open">
+			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
+			<a href="#">Example Usage</a><br>			
+		</div>		
+
+		<div id ="secret">
+			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
+			<a href="#">Example Usage</a><br>
+		</div>
+	</div>
+
+{% endblock %}

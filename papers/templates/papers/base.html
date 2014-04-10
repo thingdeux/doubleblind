@@ -5,6 +5,8 @@
 	{% load staticfiles %}
 	<script type="text/javascript" src='{% static "js/lib/jquery-1.10.2.min.js" %}'></script>
 	<link rel="stylesheet" href='{% static "css/base.css" %}' type="text/css">
+	{% block libraries %}
+	{% endblock %}
 	
 	<title>{% block title %} {{ site_name }} {% endblock %}</title>
 </head>
@@ -13,6 +15,7 @@
 	<div id = "title">
 		<div id = "site_name">
 			{{ site_name }}
+			<span id="sub_title_tag">... why put yourself out there?</span>
 		</div>
 	</div>
 

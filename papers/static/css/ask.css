@@ -1,0 +1,15 @@
+#ask_window {
+	min-width: 486px;
+	max-width: 486px;
+	min-height: 640px;
+	max-height: 640px;	
+	margin: auto;
+}
+
+	.helper_text {
+		display: none;
+	}
+
+	.submission_form {
+		margin-top: 20px;
+	}

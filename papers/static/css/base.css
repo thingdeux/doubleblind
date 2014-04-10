@@ -1,19 +1,28 @@
 body {
-	background: radial-gradient(#A4B3B3, #9CBBBB) repeat scroll 0% 0% transparent;	
+	background: radial-gradient(#A4B3B3, #9CBBBB) repeat scroll 0% 0% transparent;		
+	min-width: 100%;
+	overflow-x: hidden;	
 }
 
 #title {
 	margin-top: -10px;
 	margin-left: -10px;	
-	width: 110%;
-	height: 70px;
-	background-color: #FFF;
+	height: 70px;	
+	background: #FFFFFF;
 }
 	#site_name {		
 		margin-left: 18%;
 		padding-top: 20px;
 		font-size: 30px;
 		color: #445F5F;
+	}
+
+	#sub_title_tag {
+		font-size: 10px;
+		color: black;
+		position: absolute;
+		margin-left: -150px;
+		margin-top: 30px;		
 	}
 
 #content {	
@@ -72,7 +81,7 @@ body {
 	border-radius: 0 0 90px 90px;
 	-moz-border-radius: 0 0 90px 90px;
 	-webkit-border-radius: 0 0 90px 90px;
-	background: #FFF;	
+	background: #FFFFFF;	
 }
 
 	.mouth_text {		
