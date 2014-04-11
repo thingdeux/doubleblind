@@ -20,7 +20,7 @@
 
 		<div id = "multi">			
 			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
-			<a href="#" class="helper_button">Example Usage</a>						
+			<a href="#" class="helper_button">Instructions</a>						
 
 			<div class = "helper_text">
 				<ul>
@@ -32,11 +32,22 @@
 				</ul>
 			</div>
 
-			<div class = "submission_form">
-				<form id="multi">
-					Send To: <input type="text"></input>
-					<input type="radio">(URL Only)</input>
+			<div id = 'form_container'>
+				<form id="multi" class="submission_form">
+					
+					<table>					
+						<tr><td><span class="required_star">*</span></td>
+							<td><input type="text" size="32" name="sender" placeholder='Enter your e-mail'></input></td></tr>
+						<tr><td>&nbsp;</td>
+							<td><input type="text" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></input></td></tr>
+						<tr><td>&nbsp;</td>
+							<td><input type="text" size="32" name="question_text" placeholder="Question"></input></td></tr>
 
+						<tr><td>&nbsp;</td>
+							<td><input class="submission_button" type="submit" value="Ask" /></td>				
+						</tr>
+						<tr><td>{% csrf_token %}</td></tr>
+					</table>
 				</form>
 			</div>
 			
@@ -44,7 +55,11 @@
 
 		<div id ="open">
 			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
-			<a href="#">Example Usage</a><br>			
+			<a href="#">Example Usage</a><br>
+
+			{% for a_form in form %}
+				{{ a_form }}
+			{% endfor %}
 		</div>		
 
 		<div id ="secret">
