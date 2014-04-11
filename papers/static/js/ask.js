@@ -1,6 +1,36 @@
-$(document).ready(function() {
+$(document).ready(function() {	
+
+	//Django boilerplate functions for passing csrf cookies on POST.
+	$.ajaxSetup({ 
+	     beforeSend: function(xhr, settings) {
+	         function getCookie(name) {
+	             var cookieValue = null;
+	             if (document.cookie && document.cookie != '') {
+	                 var cookies = document.cookie.split(';');
+	                 for (var i = 0; i < cookies.length; i++) {
+	                     var cookie = jQuery.trim(cookies[i]);
+	                     // Does this cookie string begin with the name we want?
+	                 if (cookie.substring(0, name.length + 1) == (name + '=')) {
+	                     cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+	                     break;
+	                 }
+	             }
+	         }
+	         return cookieValue;
+	         }
+	         if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+	             // Only send the token to relative URLs i.e. locally.
+	             xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+	         }
+	     } 
+	});
+
+
+
 	//Instantiate jqueryUI tab
 	$( "#ask_window" ).tabs();
+
+	/*   -----  Button Handlers ----- */
 
 	//When user clicks on 'Example Usage'
 	//Slide in helper text and remove form
@@ -24,30 +54,38 @@ $(document).ready(function() {
 		}
 	});
 
+	//Stop enter key fromPOSTING
+	$('.submission_button').keypress(function (event) {
+	  if (event.which == 13) {
+	    event.preventDefault();
+	  }
+	});
+
 	$(".submission_button").click(function (event){
 		event.preventDefault();
-		
-		
-		$.ajaxSetup({data: {
-			csrfmiddlewaretoken: '{{ csrf_token }}'
-		}});
-		
-		//csrfmiddlewaretoken
 
 		
 		$.ajax({
 			type: "POST",
 			url: "/queueQuestion/",			
-			data: $(this),
+			data: $(this.form).serialize(),
 		})
 		.done(function() {
 			console.log("SENT");
-		}).
-		fail(function() {
-			
-			$("html").html(json)
-		});
+		})
+		.fail(function() {		
+			console.log("FAILED");
+		});		
+	});
+
+	//Honorary button - for adding answer
+	$(".add_answer").click(function (event) {
+		event.preventDefault();
+		console.log( $(this).closest."") );
 
 	});
 
+
 });
+
+

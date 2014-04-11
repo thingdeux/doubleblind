@@ -26,13 +26,13 @@ def Ask(request):
 	return render(request, template_names, {'site_name': WEBSITE_NAME,} )
 
 def queueQuestion(request):
+	
 	try:
 		new_question = request.POST
 		for thing in new_question:
 			print (str(thing))
 	except Exception:
 		for error in Exception:
-			print(str(error))
-
+			print(str(error))	
 
 	return (HttpResponseRedirect('/ask') )

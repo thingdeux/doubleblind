@@ -1,8 +1,8 @@
 #ask_window {
 	min-width: 486px;
 	max-width: 486px;
-	min-height: 640px;
-	max-height: 640px;	
+	min-height: 680px;
+	max-height: 680px;	
 	margin: auto;
 }
 
@@ -11,6 +11,10 @@
 	}
 
 	#form_container {
+		margin-top: 20px;
+	}
+
+	.submission_button{
 		margin-top: 20px;
 	}
 

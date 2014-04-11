@@ -37,12 +37,19 @@
 					
 					<table>					
 						<tr><td><span class="required_star">*</span></td>
-							<td><input type="text" size="32" name="sender" placeholder='Enter your e-mail'></input></td></tr>
+							<td><input type="text" size="32" name="sender" placeholder='Enter your e-mail' /></td></tr>
 						<tr><td>&nbsp;</td>
-							<td><input type="text" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></input></td></tr>
-						<tr><td>&nbsp;</td>
-							<td><input type="text" size="32" name="question_text" placeholder="Question"></input></td></tr>
+							<td><input type="text" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
+						<tr><td><span class="required_star">*</span></td>
+							<td><input type="text" size="32" name="question_text" placeholder="Question" /></td></tr>
+						
+						<!--Answers !-->
+						<tr><td><span class="required_star">*</span></td>
+							<td><input type="text" size="32" class="answer_text" name="answertext-1" placeholder="Answer" /></td>
+							<td><a href="" class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></a></td></tr>							
 
+						
+						<!--Submission Info !-->
 						<tr><td>&nbsp;</td>
 							<td><input class="submission_button" type="submit" value="Ask" /></td>				
 						</tr>
