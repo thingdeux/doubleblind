@@ -79,9 +79,34 @@ $(document).ready(function() {
 	});
 
 	//Honorary button - for adding answer
-	$(".add_answer").click(function (event) {
-		event.preventDefault();
-		console.log( $(this).closest."") );
+	$("#multi").on("click", ".add_answer, .remove_answer", function (event) {				
+		function buildNewAnswerBox(newLocation) {
+				var newString = '<tr><td>&nbsp;</td><td><input type="text" size="32" class="answer_text" name="answertext-' + newLocation + '" placeholder="Answer (Optional)"/></td> \
+				<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td> \
+				<td class="remove_answer"><span class="ui-icon ui-icon-circle-minus"></span></td></tr>'
+				return (newString)
+		}
+
+		if (event.currentTarget.className == "add_answer") {
+			//Get the name from the answer input box, increment the number following the -
+			//Add a new textbox below it with the next number
+			var lastAnswer = $(this).siblings().find('.answer_text').attr('name');
+			var answerCount = parseInt(lastAnswer.slice(11, lastAnswer.length)  );
+			
+			if (answerCount + 1 <= 10) {
+				$(buildNewAnswerBox(answerCount + 1)).insertAfter( $(this).parent() );			
+				$(this).hide();
+				//Hide all add buttons if there are 10 answer boxes on screen - 10 is plenty.
+				if (answerCount + 1 == 10) {
+					$('.add_answer').hide();
+				}
+			}			
+		}
+		else if (event.currentTarget.className == "remove_answer") {
+			$(this).parent().remove();
+		}
+
+		
 
 	});
 

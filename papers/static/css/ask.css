@@ -22,3 +22,8 @@
 		color: #FF0000;
 		font-size: 20px;
 	}
+
+	.add_answer, .remove_answer {
+		cursor: pointer;
+		cursor: hand;
+	}
