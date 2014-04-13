@@ -8,6 +8,7 @@
 
 	.helper_text {
 		display: none;
+		font-size: 16px;
 	}
 
 	#form_container {
@@ -23,7 +24,19 @@
 		font-size: 20px;
 	}
 
-	.add_answer, .remove_answer {
+	.helper_button, .add_answer, .remove_answer {
 		cursor: pointer;
 		cursor: hand;
+	}
+
+	.helper_button {		
+		text-decoration: underline;
+	}
+
+	.helper_button:hover {
+		color: #FF0000;
+	}
+
+	.question_box {
+		resize: none;
 	}

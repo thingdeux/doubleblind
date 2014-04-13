@@ -1,3 +1,9 @@
 HIGH:
+Add buffer for instructions/form switch .. when clicked quickly can cause problems.
+
 Deselect ALL OPTIONS when moving to ask page. (Or refreshing)
+
+
+
+Completed:
 Find out why siblings doesn't work for clicking the stop-sigh

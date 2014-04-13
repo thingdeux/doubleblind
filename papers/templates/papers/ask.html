@@ -14,21 +14,28 @@
 	<div id="ask_window">
 		<ul>
 			<li><a href="#multi">Multiple Choice</a></li>
-			<li><a href="#open">Open-Ended</a></li>						
 			<li><a href="#secret">Secret Reponse</a></li>
+			<li><a href="#open">Open-Ended</a></li>									
 		</ul>
 
 		<div id = "multi">			
 			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
-			<a href="#" class="helper_button">Instructions</a>						
+			<a class="helper_button">Instructions</a>						
 
 			<div class = "helper_text">
 				<ul>
-					<h2><u>Multiple choice question Tips</u></h2>
-					<li>Include enough options to keep your desired answer obscure.</li>
+					<h2><u>Multiple Choice Question Help</u></h2>
+					<li>This is a question with multiple answers</li>
+					<li>Recipients can only select <b>one</b> answer</li>										
+					<li>Notification only sent if your answer is chosen</li>															
+					<li>Questions expire in 24 hours</li>
+					<li>If you do not have the recipients e-mail <br>you will receive a link to the question</li>
+					
+					<h2><u>Multiple Choice Question Tips</u></h2>
 					<li>Keep answers simple and to the point</li>
-					<li>Keep answers consistent, if one is capitalized, they all should be.</li>
-					<li>Yes/No/Maybe answers aren't suggested.  Maybe has ruined many a day.</li>
+					<li>Include enough answers to protect your anonymity</li>
+					<li>Keep your answers consistent <br>(ex: if one is capitalized, they should all be)</li>
+					<li>Yes/No/Maybe answers aren't suggested <br>'Maybe' has ruined many a day</li>
 				</ul>
 			</div>
 
@@ -37,16 +44,16 @@
 					
 					<table>					
 						<tr><td><span class="required_star">*</span></td>
-							<td><input type="text" size="32" name="sender" placeholder='Enter your e-mail' /></td></tr>
+							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>
 						<tr><td>&nbsp;</td>
-							<td><input type="text" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
+							<td><input type="email" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
 						<tr><td><span class="required_star">*</span></td>
-							<td><input type="text" size="32" name="question_text" placeholder="Question" /></td></tr>
+							<td><input type="text" size="32" name="question_text" placeholder="Question (Required) - Max 512 Chars." /></td></tr>
 						
 						<!--Answers !-->
 						<tr><td><span class="required_star">*</span></td>
 							<td><input type="text" size="32" class="answer_text" name="answertext-1" placeholder="Answer (Required)" /></td>
-							<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td></tr>
+							<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td></tr>						
 												
 						<!--Submission Info !-->
 						<tr><td>&nbsp;</td>
@@ -59,18 +66,91 @@
 			
 		</div>
 
+
+
+		<div id ="secret">		
+			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
+			<a class="helper_button">Instructions</a>
+
+			<div class = "helper_text">
+				<ul>
+					<h2><u>Multiple Choice Question Help</u></h2>
+					<li>This is a question with multiple answers</li>
+					<li>Recipients can only select <b>one</b> answer</li>										
+					<li>Notification only sent if your answer is chosen</li>															
+					<li>Questions expire in 24 hours</li>
+					<li>If you do not have the recipients e-mail <br>you will receive a link to the question</li>
+					
+					<h2><u>Multiple Choice Question Tips</u></h2>
+					<li>Keep answers simple and to the point</li>
+					<li>Include enough answers to protect your anonymity</li>
+					<li>Keep your answers consistent <br>(ex: if one is capitalized, they should all be)</li>
+					<li>Yes/No/Maybe answers aren't suggested <br>'Maybe' has ruined many a day</li>
+				</ul>
+			</div>
+
+			<div id = 'form_container'>
+				<form id="multi" class="submission_form">
+					
+					<table>					
+						<tr><td><span class="required_star">*</span></td>
+							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>
+						<tr><td>&nbsp;</td>
+							<td><input type="email" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
+						<tr><td><span class="required_star">*</span></td>
+							<td><input type="text" size="32" name="question_text" placeholder="Question (Required) - Max 512 Chars." /></td></tr>
+						
+						<!--Answers !-->
+						<tr><td><span class="required_star">*</span></td>
+							<td><input type="text" size="32" class="secret_answer_text" name="answertext-1" placeholder="Answer (Required)" /></td>
+							<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td></tr>
+												
+						<!--Submission Info !-->
+						<tr><td>&nbsp;</td>
+							<td><input class="submission_button" type="submit" value="Ask" /></td>				
+						</tr>
+						<tr><td>{% csrf_token %}</td></tr>
+					</table>
+				</form>
+			</div>
+		</div>
+
 		<div id ="open">
 			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
-			<a href="#">Example Usage</a><br>
+			<a class="helper_button">Instructions</a>
+			
+			<div class = "helper_text">
+				<ul>
+					<h2><u>Open-Ended Question Help</u></h2>
+					<li>This question takes a response in free-text</li>
+					<li>The recipient will be presented with an answer box,<br> they can type in whatever they deem appropriate</li>					
+					<li>Notification only sent if recipient responds</li>
+					<li>Questions expire in 24 hours</li>
+					<li>If you do not have the recipients e-mail <br>you will receive a link to the question</li>
+					
+					<h2><u>Open-Ended Question Tips</u></h2>					
+					<li>If your question can be answered with a simple yes/no<br>Consider using multiple choice instead</li>					
+				</ul>
+			</div>
 
-			{% for a_form in form %}
-				{{ a_form }}
-			{% endfor %}
-		</div>		
-
-		<div id ="secret">
-			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
-			<a href="#">Example Usage</a><br>
+			<div id = 'form_container'>
+				<form id="open" class="submission_form">
+					
+					<table>					
+						<tr><td><span class="required_star">*</span></td>
+							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>
+						<tr><td>&nbsp;</td>
+							<td><input type="email" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
+						<tr><td><span class="required_star">*</span></td>
+							<td><textarea class = "question_box" name="question_text" rows="4" cols="31" placeholder="Question (Required) - Max 512 Chars."></textarea></td></tr>																								
+						<!--Submission Info !-->
+						<tr><td>&nbsp;</td>
+							<td><input class="submission_button" type="submit" value="Ask" /></td>				
+						</tr>
+						<tr><td>{% csrf_token %}</td></tr>
+					</table>
+				</form>
+			</div>			
 		</div>
 	</div>
 

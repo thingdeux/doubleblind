@@ -34,14 +34,15 @@ $(document).ready(function() {
 
 	//When user clicks on 'Example Usage'
 	//Slide in helper text and remove form
-	$( ".helper_button").click(function() {
+	$(".helper_button").click(function() {
 		$(this).next(".helper_text").toggle("slide", 400);
+		console.log($(this).next() );
 
 		var submission_form = $(this).siblings().filter('#form_container')
 
 		if ( submission_form.is(":visible") ) {
 			//Fast hide for submission form
-			$(this).html('Close')
+			$(this).html('Return')
 			submission_form.hide();			
 		}
 		else {
@@ -81,42 +82,44 @@ $(document).ready(function() {
 	//Honorary button - for adding another answer textbox
 	//Bound to form for performance
 	$("#multi").on("click", ".add_answer, .remove_answer", function (event) {				
-		function buildNewAnswerBox(newLocation) {
-				var newString = '<tr><td>&nbsp;</td><td><input type="text" size="32" class="answer_text" name="answertext-' + newLocation + '" placeholder="Answer (Optional)"/></td> \
-				<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td> \
-				<td class="remove_answer"><span class="ui-icon ui-icon-circle-minus"></span></td></tr>'
-				return (newString)
-		}
+		add_remove_buttons('.answer_text', $(this), event)		
+	});
 
-		if (event.currentTarget.className == "add_answer") {
+	$("#secret").on("click", ".add_answer, .remove_answer", function (event) {
+		add_remove_buttons('.secret_answer_text', $(this), event)			
+	});
+
+	function buildNewAnswerBox(newLocation, className) {			
+			var newString = '<tr><td>&nbsp;</td><td><input type="text" size="32" class="' + className.slice(1) +'" name="answertext-' + newLocation + '" placeholder="Answer (Optional)"/></td> \
+			<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td> \
+			<td class="remove_answer"><span class="ui-icon ui-icon-circle-minus"></span></td></tr>'			
+			return (newString)
+	}
+
+	function add_remove_buttons(textBoxName, jqueryObj, jqueryEvent) {
+		if (jqueryEvent.currentTarget.className == "add_answer") {
 			//Get the name from the answer input box, increment the number following the -
 			//Add a new textbox below it with the next number
-			var lastAnswer = $(this).siblings().find('.answer_text').attr('name');
+			var lastAnswer = jqueryObj.siblings().find(textBoxName).attr('name');
 			var answerName = parseInt(lastAnswer.slice(11, lastAnswer.length)  );
-			var answerCount = $('.answer_text').length
-
+			var answerCount = $(textBoxName).length			
 			
 			//Hide all add buttons if there are 10 answer boxes on screen - 10 is plenty.			
 			if (answerCount + 1 <= 10) {
-				$(buildNewAnswerBox(answerName + 1)).insertAfter( $(this).parent() );			
-				$(this).hide();
+				$(buildNewAnswerBox(answerName + 1, textBoxName)).insertAfter( jqueryObj.parent() );			
+				jqueryObj.hide();
 				//Remove last add_answer button
 				if (answerCount + 1 == 10) {
 					$('.add_answer').hide();
 				}
 			}			
 		}
-		else if (event.currentTarget.className == "remove_answer") {
-			$(this).parent().remove();
-			addAnswerButtons = $('.add_answer:last').show()
-
-
+		else if (jqueryEvent.currentTarget.className == "remove_answer") {
+			parentForm = jqueryObj.closest('form');			
+			jqueryObj.parent().remove();
+			parentForm.find('.add_answer:last').show();
 		}
-
-		
-
-	});
-
+	}
 
 });
 
