@@ -61,9 +61,9 @@ $(document).ready(function() {
 	  }
 	});
 
+	//Submit form on click of 'ask' button
 	$(".submission_button").click(function (event){
 		event.preventDefault();
-
 		
 		$.ajax({
 			type: "POST",
@@ -71,14 +71,15 @@ $(document).ready(function() {
 			data: $(this.form).serialize(),
 		})
 		.done(function() {
-			console.log("SENT");
+			//Placeholder
 		})
 		.fail(function() {		
-			console.log("FAILED");
+			//Placeholder-
 		});		
 	});
 
-	//Honorary button - for adding answer
+	//Honorary button - for adding another answer textbox
+	//Bound to form for performance
 	$("#multi").on("click", ".add_answer, .remove_answer", function (event) {				
 		function buildNewAnswerBox(newLocation) {
 				var newString = '<tr><td>&nbsp;</td><td><input type="text" size="32" class="answer_text" name="answertext-' + newLocation + '" placeholder="Answer (Optional)"/></td> \
@@ -91,12 +92,15 @@ $(document).ready(function() {
 			//Get the name from the answer input box, increment the number following the -
 			//Add a new textbox below it with the next number
 			var lastAnswer = $(this).siblings().find('.answer_text').attr('name');
-			var answerCount = parseInt(lastAnswer.slice(11, lastAnswer.length)  );
+			var answerName = parseInt(lastAnswer.slice(11, lastAnswer.length)  );
+			var answerCount = $('.answer_text').length
+
 			
+			//Hide all add buttons if there are 10 answer boxes on screen - 10 is plenty.			
 			if (answerCount + 1 <= 10) {
-				$(buildNewAnswerBox(answerCount + 1)).insertAfter( $(this).parent() );			
+				$(buildNewAnswerBox(answerName + 1)).insertAfter( $(this).parent() );			
 				$(this).hide();
-				//Hide all add buttons if there are 10 answer boxes on screen - 10 is plenty.
+				//Remove last add_answer button
 				if (answerCount + 1 == 10) {
 					$('.add_answer').hide();
 				}
@@ -104,6 +108,9 @@ $(document).ready(function() {
 		}
 		else if (event.currentTarget.className == "remove_answer") {
 			$(this).parent().remove();
+			addAnswerButtons = $('.add_answer:last').show()
+
+
 		}
 
 		
