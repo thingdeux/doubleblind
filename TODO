@@ -1,9 +1,14 @@
 HIGH:
 Add buffer for instructions/form switch .. when clicked quickly can cause problems.
-
 Deselect ALL OPTIONS when moving to ask page. (Or refreshing)
+MAKE SURE data is sanitized by DJANGO
+
+
+
+
+
 
 
 
 Completed:
-Find out why siblings doesn't work for clicking the stop-sigh
+Find out why siblings doesn't work for clicking the stop-sign

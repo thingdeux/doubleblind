@@ -1,8 +1,12 @@
 from datetime import datetime, timedelta
 from django.db import models
+import uuid
 
 def get_tomorrows_date():
 		return ( datetime.now() + timedelta(days=1) )
+
+def get_random_uuid():
+	return (uuid.uuid4())
 
 class Sender(models.Model):
 	email = models.EmailField(max_length=254)
@@ -11,9 +15,10 @@ class Sender(models.Model):
 	def __unicode__(self):
 		return(self.email)
 
-class Paper(models.Model):	
+class Paper(models.Model):
 	sender = models.ForeignKey(Sender)
 	sent_to = models.EmailField(max_length=254)
+	code = models.CharField(max_length=32, default=get_random_uuid())
 	#The default time for a paper to be active is 1 day
 	active_until = models.DateField(auto_now=False, default=get_tomorrows_date(), db_index=True )
 	allow_requests_sent_from = models.BooleanField(default=False)	

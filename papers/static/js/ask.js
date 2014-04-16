@@ -81,19 +81,22 @@ $(document).ready(function() {
 
 	//Honorary button - for adding another answer textbox
 	//Bound to form for performance
-	$("#multi").on("click", ".add_answer, .remove_answer", function (event) {				
+	$("#multi_form").on("click", ".add_answer, .remove_answer", function (event) {				
 		add_remove_buttons('.answer_text', $(this), event)		
 	});
 
-	$("#secret").on("click", ".add_answer, .remove_answer", function (event) {
+	$("#secret_form").on("click", ".add_answer, .remove_answer", function (event) {
 		add_remove_buttons('.secret_answer_text', $(this), event)			
 	});
 
-	function buildNewAnswerBox(newLocation, className) {			
-			var newString = '<tr><td>&nbsp;</td><td><input type="text" size="32" class="' + className.slice(1) +'" name="answertext-' + newLocation + '" placeholder="Answer (Optional)"/></td> \
-			<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td> \
-			<td class="remove_answer"><span class="ui-icon ui-icon-circle-minus"></span></td></tr>'			
-			return (newString)
+	function buildNewAnswerBox(newLocation, className) {
+
+		//Line termination \ slashes only used for readability		
+		var newString = '<tr><td><input type="radio" name="answer_selection" /></td><td> \
+		<input type="text" size="32" class="' + className.slice(1) +'" name="answertext-' + newLocation + '" placeholder="Answer (Optional)"/></td> \
+		<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td> \
+		<td class="remove_answer"><span class="ui-icon ui-icon-circle-minus"></span></td></tr>'			
+		return (newString)
 	}
 
 	function add_remove_buttons(textBoxName, jqueryObj, jqueryEvent) {

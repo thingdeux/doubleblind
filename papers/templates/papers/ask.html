@@ -20,14 +20,14 @@
 
 		<div id = "multi">			
 			<p>Word your question carefully, it could mean the difference between anonymity and awkwardness.</p>
-			<a class="helper_button">Instructions</a>						
+			<a class="helper_button">Instructions</a>			
 
 			<div class = "helper_text">
 				<ul>
 					<h2><u>Multiple Choice Question Help</u></h2>
 					<li>This is a question with multiple answers</li>
 					<li>Recipients can only select <b>one</b> answer</li>										
-					<li>Notification only sent if your answer is chosen</li>															
+					<li>Notification only sent to you if your answer is chosen</li>															
 					<li>Questions expire in 24 hours</li>
 					<li>If you do not have the recipients e-mail <br>you will receive a link to the question</li>
 					
@@ -40,19 +40,21 @@
 			</div>
 
 			<div id = 'form_container'>
-				<form id="multi" class="submission_form">
+				<form id="multi_form" class="submission_form">
 					
 					<table>					
-						<tr><td><span class="required_star">*</span></td>
+						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>
 						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
-						<tr><td><span class="required_star">*</span></td>
+						<tr><td>&nbsp;</td>
 							<td><input type="text" size="32" name="question_text" placeholder="Question (Required) - Max 512 Chars." /></td></tr>
 						
 						<!--Answers !-->
-						<tr><td><span class="required_star">*</span></td>
+						<tr><td><input type="radio" name="answer_selection" /></td>
 							<td><input type="text" size="32" class="answer_text" name="answertext-1" placeholder="Answer (Required)" /></td>
+						<tr><td><input type="radio" name="answer_selection" /></td>
+							<td><input type="text" size="32" class="answer_text" name="answertext-2" placeholder="Answer (Required)" /></td>
 							<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td></tr>						
 												
 						<!--Submission Info !-->
@@ -74,14 +76,14 @@
 
 			<div class = "helper_text">
 				<ul>
-					<h2><u>Multiple Choice Question Help</u></h2>
-					<li>This is a question with multiple answers</li>
-					<li>Recipients can only select <b>one</b> answer</li>										
-					<li>Notification only sent if your answer is chosen</li>															
+					<h2><u>Secret Response Question Help</u></h2>
+					<li>This question displays a secret message if a certain answer is selected. </li>					
+					<li>Recipients can only select <b>one</b> answer</li>
+					<li>Notification only sent to you if your answer is chosen</li>															
 					<li>Questions expire in 24 hours</li>
 					<li>If you do not have the recipients e-mail <br>you will receive a link to the question</li>
-					
-					<h2><u>Multiple Choice Question Tips</u></h2>
+					<br><span class = "helper_example_text">Example:</span> <br>If my name is chosen tell the recipient I also love them!</li><br>					
+					<h2><u>Secret Response Question Tips</u></h2>
 					<li>Keep answers simple and to the point</li>
 					<li>Include enough answers to protect your anonymity</li>
 					<li>Keep your answers consistent <br>(ex: if one is capitalized, they should all be)</li>
@@ -90,19 +92,22 @@
 			</div>
 
 			<div id = 'form_container'>
-				<form id="multi" class="submission_form">
+				<form id="secret_form" class="submission_form">
 					
-					<table>					
-						<tr><td><span class="required_star">*</span></td>
+					<table>							
+						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>
 						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
-						<tr><td><span class="required_star">*</span></td>
+						<tr><td>&nbsp;</td>
 							<td><input type="text" size="32" name="question_text" placeholder="Question (Required) - Max 512 Chars." /></td></tr>
 						
 						<!--Answers !-->
-						<tr><td><span class="required_star">*</span></td>
-							<td><input type="text" size="32" class="secret_answer_text" name="answertext-1" placeholder="Answer (Required)" /></td>
+						<tr><td><input type="radio" name="answer_selection" /></td>
+							<td><input type="text" size="32" class="answer_text" name="answertext-1" placeholder="Answer (Required)" /></td>
+
+						<tr><td><input type="radio" name="answer_selection" /></td>
+							<td><input type="text" size="32" class="secret_answer_text" name="answertext-2" placeholder="Answer (Required)" /></td>
 							<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td></tr>
 												
 						<!--Submission Info !-->
@@ -134,14 +139,14 @@
 			</div>
 
 			<div id = 'form_container'>
-				<form id="open" class="submission_form">
+				<form id="open_form" class="submission_form">
 					
 					<table>					
-						<tr><td><span class="required_star">*</span></td>
+						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>
 						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sent_to" placeholder="Recipients E-mail (Blank for URL Only)"></td></tr>
-						<tr><td><span class="required_star">*</span></td>
+						<tr><td>&nbsp;</td>
 							<td><textarea class = "question_box" name="question_text" rows="4" cols="31" placeholder="Question (Required) - Max 512 Chars."></textarea></td></tr>																								
 						<!--Submission Info !-->
 						<tr><td>&nbsp;</td>
