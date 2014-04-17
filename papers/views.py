@@ -13,6 +13,38 @@ class QuestionForm(ModelForm):
 		model = Question
 		fields = ('sender', 'paper', 'question_type', 'question_text')
 
+def getAnswers(post_data):
+	answers = []
+	for question_info in post_data:
+		if 'answertext' in question_info:
+			answer_text = post_data[question_info]
+			if len(answer_text) > 0:
+				answers.append(str(answer_text))
+
+	return (answers)	
+	
+def sanitizeInput(string_input, sanitize_type="generic"):
+	if sanitize_type == "generic":
+		return (string_input.replace("<", "") )
+	elif sanitize_type == "email":
+		#Strip out extra + email filters				
+
+		if "+" in string_input:
+			at_location = string_input.find("@")	
+			plus_location = string_input.find("+")									
+			sliced_domain = string_input[at_location:len(string_input)]
+			sliced_email = string_input[:plus_location]
+			string_input = sliced_email + sliced_domain
+		#Remove extra periods
+		if "@gmail.com" in string_input:
+			at_location = string_input.find("@")
+			sliced_email = string_input[:at_location]
+			sliced_domain = string_input[at_location:len(string_input)]			
+			sliced_email = sliced_email.replace(".", "")
+			string_input = sliced_email + sliced_domain
+
+		return string_input
+
 # Create your views here.
 def Index(request):
 	template_name = 'papers/index.html'
@@ -25,29 +57,17 @@ def Ask(request):
 	template_names = 'papers/ask.html'		
 	return render(request, template_names, {'site_name': WEBSITE_NAME,} )
 
-def queueQuestion(request):	
-	def getAnswers(post_data):
-			answers = []
-			for question_info in new_question:
-				if 'answertext' in question_info:
-					answer_text = post_data[question_info]
-					if len(answer_text) > 0:
-						answers.append(str(answer_text))
-
-			return (answers)	
-
-	def combineAndParseDataFromPOST(post_data):
-		question_text = post_data['question_text']
-		sender = post_data['sender']
-		sent_to = post_data['sent_to']
-		answers = getAnswers(post_data)
-	
+def queueQuestion(request):			
 	try:
-		#All POST data is apparently sanitized by django
-		new_question = request.POST
-		postedData = combineAndParseDataFromPOST(new_question)
-
-		print dataDict
+		#All POST data is apparently sanitized by django		
+		post_data = request.POST
+		#question_text = post_data['question_text']
+		sender = post_data['sender']
+		sent_to = sanitizeInput(post_data['sent_to'], 'email')
+		answers = getAnswers(post_data)
+		
+		print post_data		
+		
 
 
 

@@ -1,7 +1,10 @@
-HIGH:
+BLOCKING:
 Add buffer for instructions/form switch .. when clicked quickly can cause problems.
+MAKE SURE data is sanitized by DJANGO on input
+
+
+HIGH:
 Deselect ALL OPTIONS when moving to ask page. (Or refreshing)
-MAKE SURE data is sanitized by DJANGO
 
 
 
