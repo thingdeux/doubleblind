@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.forms import ModelForm
+import re
 
 from papers.models import Sender, Paper, Question, Answer
 
@@ -21,29 +22,37 @@ def getAnswers(post_data):
 			if len(answer_text) > 0:
 				answers.append(str(answer_text))
 
-	return (answers)	
+	if len(answers) >= 2:
+		return (answers)	
+	else:
+		return False
 	
 def sanitizeInput(string_input, sanitize_type="generic"):
-	if sanitize_type == "generic":
-		return (string_input.replace("<", "") )
-	elif sanitize_type == "email":
-		#Strip out extra + email filters				
+	if len(string_input) > 5:
+		if sanitize_type == "generic":
+			return (string_input.replace("<", "") )
+		elif sanitize_type == "email":
+			if not re.match(r"[^@]+@[^@]+\.[^@]+", string_input):
+				return False
 
-		if "+" in string_input:
-			at_location = string_input.find("@")	
-			plus_location = string_input.find("+")									
-			sliced_domain = string_input[at_location:len(string_input)]
-			sliced_email = string_input[:plus_location]
-			string_input = sliced_email + sliced_domain
-		#Remove extra periods
-		if "@gmail.com" in string_input:
-			at_location = string_input.find("@")
-			sliced_email = string_input[:at_location]
-			sliced_domain = string_input[at_location:len(string_input)]			
-			sliced_email = sliced_email.replace(".", "")
-			string_input = sliced_email + sliced_domain
+			#Strip out extra + email filters
+			if "+" in string_input:
+				at_location = string_input.find("@")	
+				plus_location = string_input.find("+")									
+				sliced_domain = string_input[at_location:len(string_input)]
+				sliced_email = string_input[:plus_location]
+				string_input = sliced_email + sliced_domain
+			#Remove extra periods
+			if "@gmail.com" in string_input:
+				at_location = string_input.find("@")
+				sliced_email = string_input[:at_location]
+				sliced_domain = string_input[at_location:len(string_input)]			
+				sliced_email = sliced_email.replace(".", "")
+				string_input = sliced_email + sliced_domain
 
-		return string_input
+			return string_input
+	else:
+		return False
 
 # Create your views here.
 def Index(request):
@@ -66,7 +75,7 @@ def queueQuestion(request):
 		sent_to = sanitizeInput(post_data['sent_to'], 'email')
 		answers = getAnswers(post_data)
 		
-		print post_data		
+		print answers
 		
 
 
@@ -77,3 +86,5 @@ def queueQuestion(request):
 			print(str(error))	
 
 	return (HttpResponseRedirect('/ask') )
+
+
