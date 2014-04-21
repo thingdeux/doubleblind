@@ -39,7 +39,12 @@
 		.question_box {
 			resize: none;
 		}
-	
-	
-
-	
+	#errors {
+		font-size: 12px;
+		min-width: 486px;
+		max-width: 486px;
+		position: absolute;
+		color: #FF4747;				
+		margin-top: 650px;
+        text-align: center;
+	}

@@ -71,12 +71,16 @@ $(document).ready(function() {
 			url: "/queueQuestion/",			
 			data: $(this.form).serialize(),
 		})
-		.done(function() {
-			//Placeholder
+		.done(function(xhr) {
+			if (xhr.status == 400) {				
+				$("#errors").html(xhr.statusText)
+			}
 		})
-		.fail(function() {		
-			//Placeholder-
-		});		
+		.fail(function(xhr) {					
+			if (xhr.status == 400) {
+				$("#errors").html(xhr.statusText)
+			}
+		});
 	});
 
 	//Honorary button - for adding another answer textbox

@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.forms import ModelForm
@@ -31,6 +31,9 @@ def sanitizeInput(string_input, sanitize_type="generic"):
 	if len(string_input) > 5:
 		if sanitize_type == "generic":
 			return (string_input.replace("<", "") )
+		elif sanitize_type == "question":
+			if len(string_input) < 512:
+				return string_input
 		elif sanitize_type == "email":
 			if not re.match(r"[^@]+@[^@]+\.[^@]+", string_input):
 				return False
@@ -70,12 +73,32 @@ def queueQuestion(request):
 	try:
 		#All POST data is apparently sanitized by django		
 		post_data = request.POST
-		#question_text = post_data['question_text']
-		sender = post_data['sender']
+		question_text = sanitizeInput(post_data['question_text'], 'question')
+		sender = sanitizeInput(post_data['sender'], 'email')
 		sent_to = sanitizeInput(post_data['sent_to'], 'email')
 		answers = getAnswers(post_data)
 		
-		print answers
+		if sender is not False and sent_to is not False and answers is not False and question_text is not False:
+			#Input has been sanitized and checked and can be inserted into the DB
+			print ("yay")
+		else:			
+			#Throw an error, something is incorrect
+			incorrectFields = []
+			if sender == False:
+				incorrectFields.append("Your E-mail")
+			if sent_to == False:
+				incorrectFields.append("Recipients E-mail")
+			if question_text == False:
+				incorrectFields.append("Question")
+			if answers == False:
+				incorrectFields.append("Answers")
+
+
+			response = HttpResponse()
+			response.status_code = 400
+
+			response.reason_phrase = "Error in field(s): " + ' | '.join(incorrectFields)
+			return response
 		
 
 
@@ -83,8 +106,7 @@ def queueQuestion(request):
 
 	except Exception:
 		for error in Exception:
-			print(str(error))	
-
+			print(str(error))		
 	return (HttpResponseRedirect('/ask') )
 
 
