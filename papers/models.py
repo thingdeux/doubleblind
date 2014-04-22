@@ -9,7 +9,7 @@ def get_random_uuid():
 	return (uuid.uuid4())
 
 class Sender(models.Model):
-	email = models.EmailField(max_length=254)
+	email = models.EmailField(max_length=254, unique=True)
 	ip = models.IPAddressField()
 
 	def __unicode__(self):

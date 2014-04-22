@@ -33,8 +33,9 @@ def sanitizeInput(string_input, sanitize_type="generic"):
 			return (string_input.replace("<", "") )
 		elif sanitize_type == "question":
 			if len(string_input) < 512:
-				return string_input
+				return string_input.lower()
 		elif sanitize_type == "email":
+			#Check to see if the passed string 'looks like' an email address
 			if not re.match(r"[^@]+@[^@]+\.[^@]+", string_input):
 				return False
 
@@ -53,9 +54,32 @@ def sanitizeInput(string_input, sanitize_type="generic"):
 				sliced_email = sliced_email.replace(".", "")
 				string_input = sliced_email + sliced_domain
 
-			return string_input
+			return string_input.lower()
 	else:
 		return False
+
+def checkExistingEmail(email_to_query):
+	existing = Sender.objects.filter(email=email_to_query)	
+	if len(existing) > 0:		
+		return ( existing[0] )
+	else:
+		return ( Sender(email=email_to_query) )
+
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[-1].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+def email_has_more_than_five_questions_open(email_to_query):
+	the_count = Paper.objects.filter(sent_to=email_to_query).count()	
+	if the_count >= 5:
+		return True
+	else:
+		return False
+
 
 # Create your views here.
 def Index(request):
@@ -74,13 +98,27 @@ def queueQuestion(request):
 		#All POST data is apparently sanitized by django		
 		post_data = request.POST
 		question_text = sanitizeInput(post_data['question_text'], 'question')
-		sender = sanitizeInput(post_data['sender'], 'email')
-		sent_to = sanitizeInput(post_data['sent_to'], 'email')
+		sender = sanitizeInput(post_data['sender'], 'email').lower()		
 		answers = getAnswers(post_data)
+		#An empty sent_to will generate a custom url for use
+		if len(post_data['sent_to']) >= 1:
+			sent_to = sanitizeInput(post_data['sent_to'], 'email').lower()
+		else:
+			sent_to = "Generate"
 		
-		if sender is not False and sent_to is not False and answers is not False and question_text is not False:
+		if (sender is not False and sent_to is not False and 
+			answers is not False and question_text is not False):
 			#Input has been sanitized and checked and can be inserted into the DB
-			print ("yay")
+			the_sender = checkExistingEmail(sender)
+			the_sender.ip = get_client_ip(request)
+
+			if email_has_more_than_five_questions_open(sent_to):
+				print ("Sorry bud")
+			else:
+				print ("You're ok!")
+				#Verify no more than 5 questions are open to a single e-mail
+				#paper = (sender=the_sender, sent_to=)
+			
 		else:			
 			#Throw an error, something is incorrect
 			incorrectFields = []
@@ -104,9 +142,5 @@ def queueQuestion(request):
 
 
 
-	except Exception:
-		for error in Exception:
-			print(str(error))		
-	return (HttpResponseRedirect('/ask') )
-
-
+	except Exception:		
+		return (HttpResponseRedirect('/ask') )

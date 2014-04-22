@@ -1,9 +1,9 @@
 #from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django.test import TestCase
+from django.test import TestCase, Client
 
 from papers.models import Sender, Paper, Question, Answer
-from papers.views import sanitizeInput, getAnswers
+from papers.views import sanitizeInput, getAnswers, checkExistingEmail,email_has_more_than_five_questions_open
 
 # Create your tests here.
 class AskViewMethodTests(TestCase):
@@ -50,7 +50,7 @@ class AskViewMethodTests(TestCase):
 		'''
 		If something not matching an e-mail is passed to the sanitizeInput method it should return False.
 		'''
-		self.assertEqual(sanitizeInput("thingster@gmail.com", "email"), "thingster@gmail.com")
+		self.assertEqual(sanitizeInput("Thingster@gmail.com", "email"), "thingster@gmail.com")
 
 	def test_get_answers_with_10_answers(self):
 		'''
@@ -84,3 +84,72 @@ class AskViewMethodTests(TestCase):
 
 		self.assertEqual(getAnswers(testDictionary), False)
 
+	def test_check_existing_email_query_without_email(self):
+		'''
+		A Django DB APi query is performed to check for an existing e-mail and if it exists in the DB,
+		Will return its primary key. Otherwise a fresh DB instance object will be returned. 
+		'''		
+		test_email = checkExistingEmail('calcal@gmail.com')
+		self.assertEqual(test_email.email , 'calcal@gmail.com' )
+
+	def test_check_existing_email_query_with_existing_email(self):
+		'''
+		A Django DB APi query is performed to check for an existing e-mail and if it exists in the DB,
+		Will return its primary key. Otherwise a fresh DB instance object will be returned. 
+		'''		
+		new_email1 = Sender(email="calcutta@gmail.com", ip="10.10.10.11")		
+		new_email2 = Sender(email="calcal@gmail.com", ip="10.10.10.10")	
+		new_email1.save()
+		new_email2.save()		
+
+		test_email = checkExistingEmail('calcal@gmail.com')
+
+		self.assertEqual(test_email.email, 'calcal@gmail.com' )
+		self.assertEqual(test_email.ip, '10.10.10.10')
+
+	def test_email_has_more_than_five_questions_with_five_questions(self):
+		'''
+		Method will return true if 5 or more papers exist for a certain e-mail.
+		E-Mail is passed as a string for a count query. Creating 5 papers.
+		'''
+		sent_from = Sender(email="calcal@gmail.com", ip="10.10.50.50")
+		sent_from.save()
+		for x in range(5):
+			paper = Paper(sender=sent_from, sent_to="bobbie@gmail.com", active_until=timezone.now())
+			paper.save()		
+		self.assertEqual(email_has_more_than_five_questions_open('bobbie@gmail.com'), True)
+
+	def test_email_has_more_than_five_questions_with_three_questions(self):
+		'''
+		Method will return true if 5 or more papers exist for a certain e-mail.
+		E-Mail is passed as a string for a count query. Creating 3 papers.
+		'''
+		sent_from = Sender(email="calcal@gmail.com", ip="10.10.50.50")
+		sent_from.save()
+		for x in range(3):
+			paper = Paper(sender=sent_from, sent_to="bobbie@gmail.com", active_until=timezone.now())
+			paper.save()		
+		self.assertEqual(email_has_more_than_five_questions_open('bobbie@gmail.com'), False)
+
+	def test_email_has_more_than_five_questions_with_zero_questions(self):
+		'''
+		Method will return true if 5 or more papers exist for a certain e-mail.
+		E-Mail is passed as a string for a count query. Creating 0 papers.
+		'''
+		self.assertEqual(email_has_more_than_five_questions_open('bobbie@gmail.com'), False)
+
+
+
+
+	'''Example web page testing with POST (from official docs)
+		def web_page_test(self):
+			c = Client() #instantiate faux web Client
+			response = c.post('papers/ask.html', {'question': 'Who do you like?', 'Answertext-1: "Me?" })			
+			self.assertEqual(response.status_code, 200)
+
+			response.get('papers/index.html') #May not have the url syntax right
+			#https://docs.djangoproject.com/en/1.6/topics/testing/tools/
+
+	'''
+
+	#Placeholder for get_client_ip() tests
