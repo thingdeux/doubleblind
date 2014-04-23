@@ -4,6 +4,7 @@ MAKE SURE data is sanitized by DJANGO on input
 
 
 HIGH:
+FIX Coding style Standards follow PEP8
 Deselect ALL OPTIONS when moving to ask page. (Or refreshing)
 
 

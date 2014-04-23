@@ -39,6 +39,8 @@ class AskViewMethodTests(TestCase):
 		'''
 		#Just text with no @ ... '.com'
 		self.assertEqual(sanitizeInput("CherryPy", "email"), False)
+		#Empty string
+		self.assertEqual(sanitizeInput("", "email"), False)
 		#Just text and a .com with no @
 		self.assertEqual(sanitizeInput("towermunchkin.com", "email"), False)
 		#Just an @ with no .com
@@ -52,11 +54,39 @@ class AskViewMethodTests(TestCase):
 		'''
 		self.assertEqual(sanitizeInput("Thingster@gmail.com", "email"), "thingster@gmail.com")
 
+	def test_sanitize_input_question_type_incorrect_type_with_incorrect_strings(self):
+		'''
+		This should return false unless the string is Open | Secret | Multiple
+		'''
+		#Open in the string but words after
+		self.assertEqual( sanitizeInput("Open Deck", "question_type"), False )		
+		#Secret in the string but words after
+		self.assertEqual( sanitizeInput("Secrets", "question_type"), False )		
+		#Multiple in the string but words after
+		self.assertEqual( sanitizeInput("Multiple Love", "question_type"), False )		
+		#Empty string
+		self.assertEqual( sanitizeInput("", "question_type"), False )		
+
+	def test_sanitize_input_question_type_correct_types(self):
+		'''
+		This should return false unless the string is Open | Secret | Multiple
+		When true it should return the string passed (ex: Open/Secret/Multiple)
+		'''		
+		self.assertEqual(sanitizeInput("Multiple", "question_type"), "Multiple")
+		#Secret in the string but words after
+		self.assertEqual(sanitizeInput("Secret", "question_type"), "Secret")
+		#Multiple in the string but words after
+		self.assertEqual(sanitizeInput("Open", "question_type"), "Open")
+
+	#Placeholder for sanitize input question
+	#Placeholder for sanitize input selected_answer
+
 	def test_get_answers_with_10_answers(self):
 		'''
 		Method should be passed raw post_data and return a list of answers gleaned from the dictionary.
 		Any key with 'answertext' whose length is greater than 0 should have its value taken and inserted 
-		into the returned list.  This test passes the method 10 answers and expects them all back in a list.
+		into the returned list along with the number after answertext-.  
+		This test passes the method 10 answers and expects them all back in a list.
 		'''
 		testDictionary = {
 			'answertext-1': "Answer1",
@@ -71,8 +101,18 @@ class AskViewMethodTests(TestCase):
 			'answertext-10': "Answer10",
 		}
 		#Sorting for list comparison purposes
-		self.assertEqual(sorted(getAnswers(testDictionary)), sorted(['Answer1', 'Answer2', 'Answer3', 'Answer4', 'Answer5',
-																	'Answer6', 'Answer7', 'Answer8', 'Answer9', 'Answer10']) )
+		self.assertEqual(sorted(getAnswers(testDictionary)), sorted([
+																	['Answer1', 1], 
+																	['Answer2', 2],
+																	['Answer3', 3],
+																	['Answer4', 4],
+																	['Answer5', 5],
+																	['Answer6', 6], 
+																	['Answer7', 7],
+																	['Answer8', 8],
+																	['Answer9', 9],
+																	['Answer10', 10]
+																	]) )
 
 	def test_get_answers_with_1_answer(self):
 		'''
@@ -153,3 +193,6 @@ class AskViewMethodTests(TestCase):
 	'''
 
 	#Placeholder for get_client_ip() tests
+	#Placeholder for create_new_pape
+	#Placeholder for create_answers_objects	
+	#Placeholder for 

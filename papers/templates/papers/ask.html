@@ -44,7 +44,8 @@
 
 			<div id = 'form_container'>
 				<form id="multi_form" class="submission_form">
-					
+					<input type="hidden" name="question_type" value="Multiple" />
+
 					<table>					
 						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>
@@ -54,17 +55,19 @@
 							<td><input type="text" size="32" name="question_text" placeholder="Question (Required) - Max 512 Chars." /></td></tr>
 						
 						<!--Answers !-->
-						<tr><td><input type="radio" name="answer_selection" /></td>
+						<tr><td><input type="radio" name="selected_answer" value="1" /></td>
 							<td><input type="text" size="32" class="answer_text" name="answertext-1" placeholder="Answer (Required)" /></td>
-						<tr><td><input type="radio" name="answer_selection" /></td>
+						<tr><td><input type="radio" name="selected_answer" value="2"/></td>
 							<td><input type="text" size="32" class="answer_text" name="answertext-2" placeholder="Answer (Required)" /></td>
 							<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td></tr>						
 												
-						<!--Submission Info !-->
+						<!--Submission Info !-->						
 						<tr><td>&nbsp;</td>
-							<td><input class="submission_button" type="submit" value="Ask" /></td>				
+							<td><input class="submission_button" type="submit" value="Ask" /></td>
 						</tr>
-						<tr><td>{% csrf_token %}</td></tr>
+						<tr>
+							<td>{% csrf_token %}</td>							
+						</tr>
 					</table>
 				</form>
 			</div>
@@ -96,6 +99,7 @@
 
 			<div id = 'form_container'>
 				<form id="secret_form" class="submission_form">
+					<input type="hidden" name="question_type" value="Secret" />
 					
 					<table>							
 						<tr><td>&nbsp;</td>
@@ -106,10 +110,10 @@
 							<td><input type="text" size="32" name="question_text" placeholder="Question (Required) - Max 512 Chars." /></td></tr>
 						
 						<!--Answers !-->
-						<tr><td><input type="radio" name="answer_selection" /></td>
+						<tr><td><input type="radio" name="selected_answer" value="1" /></td>
 							<td><input type="text" size="32" class="answer_text" name="answertext-1" placeholder="Answer (Required)" /></td>
 
-						<tr><td><input type="radio" name="answer_selection" /></td>
+						<tr><td><input type="radio" name="selected_answer" value="2"/></td>
 							<td><input type="text" size="32" class="secret_answer_text" name="answertext-2" placeholder="Answer (Required)" /></td>
 							<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td></tr>
 												
@@ -143,7 +147,7 @@
 
 			<div id = 'form_container'>
 				<form id="open_form" class="submission_form">
-					
+					<td><input type="hidden" name="question_type" value="Open" />
 					<table>					
 						<tr><td>&nbsp;</td>
 							<td><input type="email" size="32" name="sender" placeholder='Enter your e-mail (Required)' /></td></tr>

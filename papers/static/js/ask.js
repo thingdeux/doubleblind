@@ -36,7 +36,7 @@ $(document).ready(function() {
 	//Slide in helper text and remove form
 	$(".helper_button").click(function() {
 		$(this).next(".helper_text").toggle("slide", 400);
-		console.log($(this).next() );
+		
 
 		var submission_form = $(this).siblings().filter('#form_container')
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 	function buildNewAnswerBox(newLocation, className) {
 
 		//Line termination \ slashes only used for readability		
-		var newString = '<tr><td><input type="radio" name="answer_selection" /></td><td> \
+		var newString = '<tr><td><input type="radio" name="selected_answer" value="' + newLocation + '"/></td><td> \
 		<input type="text" size="32" class="' + className.slice(1) +'" name="answertext-' + newLocation + '" placeholder="Answer (Optional)"/></td> \
 		<td class="add_answer"><span class="ui-icon ui-icon-circle-plus"></span></td> \
 		<td class="remove_answer"><span class="ui-icon ui-icon-circle-minus"></span></td></tr>'			

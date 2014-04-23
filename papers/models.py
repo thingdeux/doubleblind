@@ -24,7 +24,7 @@ class Paper(models.Model):
 	allow_requests_sent_from = models.BooleanField(default=False)	
 
 	def __unicode__(self):
-		return(self.sent_to)
+		return(self.id)
 
 class Question(models.Model):
 	sender = models.ForeignKey(Sender)
@@ -41,13 +41,12 @@ class Question(models.Model):
 	question_text = models.CharField(max_length=512)
 
 	def __unicode__(self):
-		return(self.question_type)
+		return(self.question_text)
 
 class Answer(models.Model):
 	sender = models.ForeignKey(Sender)
 	paper = models.ForeignKey(Paper)	
 	question = models.ForeignKey(Question)
-
 
 	answer_text = models.CharField(max_length=512)
 	isSelected = models.BooleanField(default=False)
@@ -55,6 +54,12 @@ class Answer(models.Model):
 	secret_response = models.CharField(max_length=512, blank=True)
 	secret_guesses = models.IntegerField(default=1, blank=True)
 	open_ended_response = models.CharField(max_length=512, blank=True)
+
+	def get_code(self):
+		return (self.paper.code)
+
+	def get_sent_to(self):
+		return (self.paper.sent_to)
 
 	def __unicode__(self):
 		return(self.answer_text)
