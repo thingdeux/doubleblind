@@ -1,4 +1,5 @@
 BLOCKING:
+FIX UUID not being random apparently
 Add buffer for instructions/form switch .. when clicked quickly can cause problems.
 MAKE SURE data is sanitized by DJANGO on input
 
@@ -6,11 +7,6 @@ MAKE SURE data is sanitized by DJANGO on input
 HIGH:
 FIX Coding style Standards follow PEP8
 Deselect ALL OPTIONS when moving to ask page. (Or refreshing)
-
-
-
-
-
 
 
 

@@ -5,9 +5,6 @@ import uuid
 def get_tomorrows_date():
 		return ( datetime.now() + timedelta(days=1) )
 
-def get_random_uuid():
-	return (uuid.uuid4())
-
 class Sender(models.Model):
 	email = models.EmailField(max_length=254, unique=True)
 	ip = models.IPAddressField()
@@ -18,7 +15,7 @@ class Sender(models.Model):
 class Paper(models.Model):
 	sender = models.ForeignKey(Sender)
 	sent_to = models.EmailField(max_length=254)
-	code = models.CharField(max_length=32, default=get_random_uuid())
+	code = models.CharField(max_length=32)
 	#The default time for a paper to be active is 1 day
 	active_until = models.DateField(auto_now=False, default=get_tomorrows_date(), db_index=True )
 	allow_requests_sent_from = models.BooleanField(default=False)	

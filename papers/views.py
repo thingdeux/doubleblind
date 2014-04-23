@@ -3,11 +3,14 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.forms import ModelForm
+import uuid
 import re
 
 from papers.models import Sender, Paper, Question, Answer
 
 WEBSITE_NAME = "Doubleblind"
+
+
 
 # Create your views here.
 def Index(request):
@@ -80,12 +83,6 @@ def queueQuestion(request):
 
 	except Exception:		
 		return (HttpResponseRedirect('/ask') )
-
-
-class QuestionForm(ModelForm):
-	class Meta:
-		model = Question
-		fields = ('sender', 'paper', 'question_type', 'question_text')
 
 def getAnswers(post_data):
 	answers = []
@@ -175,6 +172,7 @@ def create_new_paper(**kwargs):
 		the_sender.save()
 
 		new_paper = Paper(sender=the_sender, sent_to=kwargs['sent_to'])
+		new_paper.code = uuid.uuid4()
 		new_paper.save()
 		new_question = Question(sender=the_sender, paper=new_paper, question_text=kwargs['question'],
 								question_type=kwargs['question_type'])		
@@ -184,8 +182,7 @@ def create_new_paper(**kwargs):
 				
 		test = Answer.objects.bulk_create(new_answers)
 		test.save()
-
-							
+					
 def create_answers_objects(sender, paper, question, answers, selected_answer):
 	#Create django answer objects from a list of answers	
 	if question.question_type == "Multiple" or question.question_type == "Secret":		
@@ -204,3 +201,8 @@ def create_answers_objects(sender, paper, question, answers, selected_answer):
 		new_answer = Answer(sender=sender, paper=paper, question=question)
 		new_answer.answer_text = "Open"	
 		return answers_to_return
+
+class QuestionForm(ModelForm):
+	class Meta:
+		model = Question
+		fields = ('sender', 'paper', 'question_type', 'question_text')
