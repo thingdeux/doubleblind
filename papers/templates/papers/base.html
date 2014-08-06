@@ -2,12 +2,8 @@
 <html lang="en">
 
 <head>	
-	{% load staticfiles %}
-	<script type="text/javascript" src='{% static "js/lib/jquery-1.10.2.min.js" %}'></script>
-	<link rel="stylesheet" href='{% static "css/base.css" %}' type="text/css">
-	{% block libraries %}
-	{% endblock %}
-	
+	{% load staticfiles %}	
+	<link rel="stylesheet" href="{% static "css/base.css" %}">	
 	<title>{% block title %} {{ site_name }} {% endblock %}</title>
 </head>
 
@@ -32,6 +28,8 @@
 		<a href = "#" class="no_undie_link"> API</a>
 		{% endblock %}
 	</div>
-
+	<script type="text/javascript" src='{% static "js/lib/jquery-1.10.2.min.js" %}'></script>
+	{% block libraries %}
+	{% endblock %}
 </body>
 </html>

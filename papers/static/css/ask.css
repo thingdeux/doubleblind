@@ -1,7 +1,6 @@
 #ask_window {
 	min-width: 486px;
-	max-width: 486px;
-	min-height: 680px;
+	max-width: 509px;	
 	max-height: 680px;	
 	margin: auto;
 }
